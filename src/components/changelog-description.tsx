@@ -8,7 +8,7 @@ import { GitHubUsername } from "./github-username";
 
 const isDev = process.env.NODE_ENV === "development";
 
-function debugLog(message: string, ...args: any[]) {
+function debugLog(message: string, ...args: unknown[]) {
   if (isDev) {
     console.log(`[ChangelogDescription] ${message}`, ...args);
   }
@@ -27,9 +27,8 @@ function processGitHubLinks(text: string, repoFullName: string): string {
 
   // Replace PR references first (including those in parentheses)
   const prPattern = /(?:^|\s|[([])#(\d+)(?=[\s\n\])]|$)/g;
-  processedText = processedText.replace(prPattern, (match, issue, offset) => {
+  processedText = processedText.replace(prPattern, (match, issue) => {
     debugLog("Found PR reference:", issue);
-    // Preserve the opening character if it's a bracket or parenthesis
     const prefix =
       match.startsWith("(") || match.startsWith("[") ? match[0] : " ";
     return `${prefix}[#${issue}](https://github.com/${repoFullName}/issues/${issue})`;

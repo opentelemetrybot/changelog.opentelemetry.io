@@ -1,10 +1,9 @@
 import { getAllEntries } from "@/lib/store";
-import { type NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const entries = await getAllEntries();
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://changelog.opentelemetry.io";
