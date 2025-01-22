@@ -136,7 +136,7 @@ const MOCK_ENTRIES: ChangelogEntry[] = [
 ];
 
 // In-memory store for development
-let devStore: ChangelogEntry[] = [];
+const devStore: ChangelogEntry[] = [];
 
 export async function saveEntry(entry: ChangelogEntry) {
   if (process.env.NODE_ENV === "development") {

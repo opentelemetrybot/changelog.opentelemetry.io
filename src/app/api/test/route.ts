@@ -1,8 +1,7 @@
-import { NextRequest } from "next/server";
 import { saveEntry } from "@/lib/store";
 import { ChangelogEntry } from "@/types/entry";
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   // Only allow in development
   if (process.env.NODE_ENV !== "development") {
     return new Response("Test endpoint only available in development", {
