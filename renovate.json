@@ -25,7 +25,6 @@
     "enabled": true,
     "schedule": ["before 3am on Monday"]
   },
-  "rebaseWhen": "conflicted",
   "ignoreDeps": [
     "@types/node"
   ],
