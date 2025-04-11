@@ -3,5 +3,34 @@
   "extends": [
     "config:recommended",
     "helpers:pinGitHubActionDigests"
-  ]
+  ],
+  "packageRules": [
+    {
+      "groupName": "all patch versions",
+      "groupSlug": "all-patch",
+      "matchUpdateTypes": ["patch"],
+      "schedule": ["before 3am every weekday"],
+      "matchPackageNames": ["!prettier"]
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "schedule": ["before 3am on Monday"]
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "schedule": ["before 3am on Monday"]
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 3am on Monday"]
+  },
+  "ignoreDeps": [
+    "@types/node"
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"]
+  },
+  "labels": ["dependencies"]
 }
