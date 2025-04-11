@@ -33,6 +33,5 @@
     "enabled": true,
     "labels": ["security"]
   },
-  "assignees": ["@trask", "@austinlparker"],
   "labels": ["dependencies"]
 }
