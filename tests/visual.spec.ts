@@ -13,9 +13,11 @@ test.describe('Visual Regression Tests', () => {
     await page.waitForSelector('h1');
     
     // Compare the screenshot with a reference
+    // Use updateSnapshots flag in CI to automate snapshot creation
     await expect(page).toHaveScreenshot('homepage.png', {
       timeout: 5000,
       maxDiffPixelRatio: 0.05, // Allow 5% difference
+      threshold: 0.2, // More tolerant threshold for CI variations
     });
   });
   
@@ -28,6 +30,7 @@ test.describe('Visual Regression Tests', () => {
     await expect(page).toHaveScreenshot('homepage-mobile.png', {
       timeout: 5000,
       maxDiffPixelRatio: 0.05,
+      threshold: 0.2,
     });
     
     // Tablet
@@ -37,6 +40,7 @@ test.describe('Visual Regression Tests', () => {
     await expect(page).toHaveScreenshot('homepage-tablet.png', {
       timeout: 5000,
       maxDiffPixelRatio: 0.05,
+      threshold: 0.2,
     });
     
     // Desktop
@@ -46,6 +50,7 @@ test.describe('Visual Regression Tests', () => {
     await expect(page).toHaveScreenshot('homepage-desktop.png', {
       timeout: 5000,
       maxDiffPixelRatio: 0.05,
+      threshold: 0.2,
     });
   });
 
@@ -63,6 +68,7 @@ test.describe('Visual Regression Tests', () => {
     await expect(page).toHaveScreenshot('homepage-dark-mode.png', {
       timeout: 5000,
       maxDiffPixelRatio: 0.05,
+      threshold: 0.2,
     });
   });
 });

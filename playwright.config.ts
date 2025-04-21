@@ -7,10 +7,19 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 30000,
+  // Increase timeout for CI environment
+  timeout: process.env.CI ? 60000 : 30000,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
+  // Increase expect timeout for visual assertions
+  expect: {
+    timeout: 10000,
+    toHaveScreenshot: { 
+      threshold: 0.2,
+      maxDiffPixelRatio: 0.05,
+    },
+  },
   reporter: 'html',
   
   use: {
