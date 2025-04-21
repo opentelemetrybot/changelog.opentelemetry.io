@@ -39,3 +39,6 @@ next-env.d.ts
 .netlify
 
 .env
+
+# Task list for Claude
+TASKS.md
