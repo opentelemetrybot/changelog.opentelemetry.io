@@ -12,7 +12,8 @@ export const revalidate = 60;
 // Convert markdown to HTML for RSS feeds
 function markdownToHtml(markdown: string): string {
   try {
-    return marked.parse(markdown);
+    // Use marked.parse with synchronous option to ensure it returns a string
+    return marked.parse(markdown, { async: false }) as string;
   } catch (error) {
     console.warn("Failed to convert markdown to HTML:", error);
     return markdown;
