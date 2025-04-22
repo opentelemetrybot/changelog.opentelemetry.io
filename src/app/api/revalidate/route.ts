@@ -1,3 +1,8 @@
+/*
+ * Copyright The OpenTelemetry Authors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import { revalidatePath } from "next/cache";
 import { NextRequest } from "next/server";
 
