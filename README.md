@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OpenTelemetry Changelog
+
+This is the source repository for [changelog.opentelemetry.io](https://changelog.opentelemetry.io), a website that tracks changes across OpenTelemetry repositories.
 
 ## Getting Started
 
@@ -27,10 +29,35 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Testing
 
-## Deploy on Vercel
+This project uses Playwright for end-to-end and visual regression testing.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To run tests:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Install Playwright browsers and dependencies
+npx playwright install --with-deps
+
+# Run all tests
+npm test
+
+# Run tests with UI
+npm run test:ui
+
+# Run tests in debug mode
+npm run test:debug
+
+# Run only visual regression tests
+npm run test:visual
+```
+
+Tests are located in the `tests` directory and are organized by feature. Visual regression tests automatically capture screenshots for comparison against baselines.
+
+## Contributing
+
+Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details on how to contribute to this project.
+
+## License
+
+Apache-2.0 - See [LICENSE](./LICENSE) for more information.

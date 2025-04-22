@@ -142,10 +142,11 @@ export function FilteredList({ entries }: { entries: ChangelogEntry[] }) {
             key={entry.id}
             className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-5 border border-gray-100 dark:border-gray-700"
             aria-labelledby={`entry-${entry.id}-title`}
+            data-testid="changelog-entry"
           >
             <h2
               id={`entry-${entry.id}-title`}
-              className="text-lg font-medium leading-tight"
+              className="text-lg font-medium leading-tight entry-title"
             >
               <a
                 href={entry.metadata.url}
@@ -158,7 +159,7 @@ export function FilteredList({ entries }: { entries: ChangelogEntry[] }) {
               </a>
             </h2>
 
-            <div className="mt-2">
+            <div className="mt-2 entry-description">
               <ChangelogDescription
                 description={entry.description}
                 repoFullName={entry.metadata.sourceRepo}
