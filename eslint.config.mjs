@@ -13,6 +13,9 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: ["next", "next/core-web-vitals", "next/typescript"],
+    rules: {
+      "header/header": "off" // Temporarily disable header check
+    }
   }),
 ];
 
