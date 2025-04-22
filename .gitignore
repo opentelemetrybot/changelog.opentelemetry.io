@@ -11,7 +11,9 @@
 /test-results/
 /playwright-report/
 /playwright/.cache/
-/tests/*-snapshots/
+# Keep snapshots in git but exclude dynamically created ones
+!/tests/*-snapshots/
+/tests-results/
 
 # next.js
 /.next/
