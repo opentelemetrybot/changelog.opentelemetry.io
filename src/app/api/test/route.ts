@@ -17,7 +17,7 @@ export async function POST() {
   const testEntry: ChangelogEntry = {
     id: Date.now(), // Use timestamp as ID for test entries
     title: `Test Entry ${new Date().toISOString()}`,
-    description: "This is a test entry to verify cache revalidation",
+    description: "This is a test entry with **bold text**, *italic* and a [link text](http://example.com) to verify markdown handling in RSS feed.",
     date: new Date().toISOString(),
     metadata: {
       sourceRepo: "open-telemetry/test-repo",

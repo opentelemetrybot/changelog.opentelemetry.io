@@ -4,9 +4,52 @@
  */
 
 import { getAllEntries } from "@/lib/store";
+import { marked } from "marked";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
+
+// Convert markdown to HTML for RSS feeds
+function markdownToHtml(markdown: string): string {
+  try {
+    return marked.parse(markdown);
+  } catch (error) {
+    console.warn("Failed to convert markdown to HTML:", error);
+    return markdown;
+  }
+}
+
+// Process GitHub-specific markdown like PR references, commit SHAs, etc.
+function processGitHubMarkdown(text: string, repoFullName: string): string {
+  let processedText = text;
+
+  // Replace PR references first (including those in parentheses)
+  const prPattern = /(?:^|\s|[([])#(\d+)(?=[\s\n\])]|$)/g;
+  processedText = processedText.replace(prPattern, (match, issue) => {
+    const prefix = match.startsWith("(") || match.startsWith("[") ? match[0] : " ";
+    return `${prefix}[#${issue}](https://github.com/${repoFullName}/issues/${issue})`;
+  });
+
+  // Replace commit SHAs
+  const shaPattern = /(\s|^)([0-9a-f]{40})(?=[\s\n]|$)/g;
+  processedText = processedText.replace(shaPattern, (match, space, sha) => {
+    return `${space}[${sha}](https://github.com/${repoFullName}/commit/${sha})`;
+  });
+
+  // Replace user mentions
+  const userPattern = /(?:^|\s)@([a-zA-Z0-9-]+)(?=[\s\n]|$)/g;
+  processedText = processedText.replace(userPattern, (match, username) => {
+    return ` [@${username}](https://github.com/${username})`;
+  });
+
+  // Replace repository references with issue numbers
+  const repoPattern = /([a-zA-Z0-9-]+\/[a-zA-Z0-9-._-]+)#(\d+)(?=[\s\n]|$)/g;
+  processedText = processedText.replace(repoPattern, (match, repo, issue) => {
+    return `[${repo}#${issue}](https://github.com/${repo}/issues/${issue})`;
+  });
+
+  return processedText;
+}
 
 export async function GET() {
   const entries = await getAllEntries();
@@ -23,13 +66,18 @@ export async function GET() {
         <language>en-US</language>
         ${entries
           .map(
-            (entry) => `
+            (entry) => {
+              // Process GitHub markdown first, then convert to HTML
+              const processedDescription = processGitHubMarkdown(entry.description, entry.metadata.sourceRepo);
+              const htmlDescription = markdownToHtml(processedDescription);
+              
+              return `
           <item>
             <title><![CDATA[${entry.title}]]></title>
             <link>${baseUrl}/entry/${entry.id}</link>
             <guid isPermaLink="false">${entry.id}</guid>
             <pubDate>${new Date(entry.date).toUTCString()}</pubDate>
-            <description><![CDATA[${entry.description}]]></description>
+            <description><![CDATA[${htmlDescription}]]></description>
             ${
               entry.metadata.sourceRepo
                 ? `
@@ -38,7 +86,7 @@ export async function GET() {
                 : ""
             }
           </item>
-        `,
+        `}
           )
           .join("")}
       </channel>
