@@ -41,6 +41,21 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
+    // Project specifically for visual testing with stable configuration
+    {
+      name: 'visual-tests',
+      testMatch: /.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1280, height: 720 },
+        deviceScaleFactor: 1,
+        colorScheme: 'light',
+        // Ensure consistent rendering for visual tests
+        launchOptions: {
+          args: ['--font-render-hinting=none', '--disable-gpu-rasterization']
+        }
+      },
+    },
   ],
 
   webServer: {
@@ -49,5 +64,6 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     stdout: 'pipe',
     stderr: 'pipe',
+    timeout: 60000, // Give more time for the server to start, especially in CI
   },
 });
