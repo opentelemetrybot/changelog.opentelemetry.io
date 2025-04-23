@@ -62,7 +62,6 @@ export async function POST(request: NextRequest) {
       await saveEntry(entry);
     } else if (
       payload.action === "closed" &&
-      payload.pull_request.merged &&
       payload.pull_request.labels.some(
         (label) => label.name === CHANGELOG_LABEL,
       )
@@ -74,7 +73,7 @@ export async function POST(request: NextRequest) {
         date: payload.pull_request.merged_at || payload.pull_request.updated_at,
         metadata: {
           sourceRepo: payload.repository.full_name,
-          state: "merged",
+          state: payload.pull_request.merged ? "merged" : "closed",
           url: payload.pull_request.html_url,
           author: payload.pull_request.user.login,
         },

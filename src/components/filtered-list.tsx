@@ -61,6 +61,7 @@ const StatusIcon = ({ state, label }: { state: string; label: string }) => {
     merged: RiCheckboxCircleFill,
     opened: RiAddCircleFill,
     released: RiRocketFill,
+    closed: RiCheckboxCircleFill,
   };
 
   const Icon = icons[state as keyof typeof icons];
@@ -68,6 +69,7 @@ const StatusIcon = ({ state, label }: { state: string; label: string }) => {
     merged: "text-purple-500",
     opened: "text-green-500",
     released: "text-blue-500",
+    closed: "text-red-500",
   };
 
   return Icon ? (
@@ -91,6 +93,7 @@ export function FilteredList({ entries }: { entries: ChangelogEntry[] }) {
   const stateOptions = [
     { value: "all", label: "All States" },
     { value: "opened", label: "Opened" },
+    { value: "closed", label: "Closed" },
     { value: "merged", label: "Merged" },
     { value: "released", label: "Released" },
   ];
