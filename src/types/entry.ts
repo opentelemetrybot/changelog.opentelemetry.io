@@ -10,7 +10,7 @@ export interface ChangelogEntry {
   date: string;
   metadata: {
     sourceRepo: string;
-    state: "opened" | "merged" | "released";
+    state: "opened" | "merged" | "released" | "closed";
     url: string;
     author: string;
   };
