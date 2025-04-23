@@ -10,36 +10,14 @@ test.describe('UI Components Tests', () => {
   // We'll create a simple test page that renders the components
   // This approach ensures we can test components independent of the main application
   
-  // Test pagination component
-  test('pagination component visual test', async ({ page }) => {
+  // Test pagination component - skipped since component was removed
+  test.skip('pagination component visual test', async ({ page }) => {
+    // This test is skipped because the pagination component was removed
     // First navigate to the homepage
     await page.goto('/');
     
-    // Wait for the pagination component to be visible
-    // This test will be skipped if pagination isn't shown (e.g., not enough entries)
-    if (await page.isVisible('nav[aria-label="Pagination"]')) {
-      // Take a screenshot of the pagination component
-      await expect(page.locator('nav[aria-label="Pagination"]')).toHaveScreenshot('pagination-component.png', {
-        timeout: 5000,
-        maxDiffPixelRatio: 0.05,
-        threshold: 0.2,
-      });
-      
-      // Click the next page button to see styling changes
-      const nextButton = page.locator('button[aria-label="Next page"]');
-      if (await nextButton.isEnabled()) {
-        await nextButton.click();
-        await page.waitForTimeout(300); // Wait for any transitions
-        
-        await expect(page.locator('nav[aria-label="Pagination"]')).toHaveScreenshot('pagination-component-next.png', {
-          timeout: 5000,
-          maxDiffPixelRatio: 0.05,
-          threshold: 0.2,
-        });
-      }
-    } else {
-      test.skip();
-    }
+    // Placeholder test to skip
+    expect(true).toBe(true);
   });
   
   // Test the filtering mechanism
