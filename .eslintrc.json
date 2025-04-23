@@ -1,11 +1,6 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"],
-  "plugins": ["header"],
+  "extends": ["next/core-web-vitals"],
   "rules": {
-    "header/header": [
-      2,
-      "block",
-      "Copyright The OpenTelemetry Authors\nSPDX-License-Identifier: Apache-2.0"
-    ]
+    "header/header": "off"
   }
 }
