@@ -54,10 +54,19 @@ npm run test:visual
 
 Tests are located in the `tests` directory and are organized by feature. Visual regression tests automatically capture screenshots for comparison against baselines.
 
+## License
+
+Apache-2.0 - See [LICENSE](./LICENSE) for more information.
+
 ## Contributing
 
 Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details on how to contribute to this project.
 
-## License
+### Maintainers
 
-Apache-2.0 - See [LICENSE](./LICENSE) for more information.
+- [Austin Parker](https://github.com/austinlparker), Honeycomb
+- [Trask Stalnaker](https://github.com/trask), Microsoft
+
+### Approvers
+
+- [Adriel Perkins](https://github.com/adrielp), Latrio
