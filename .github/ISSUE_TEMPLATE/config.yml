@@ -1,0 +1,14 @@
+# Copyright The OpenTelemetry Authors
+# SPDX-License-Identifier: Apache-2.0
+
+blank_issues_enabled: false
+contact_links:
+  - name: OpenTelemetry Community
+    url: https://opentelemetry.io/community/
+    about: General questions about OpenTelemetry
+  - name: OpenTelemetry Slack
+    url: https://cloud-native.slack.com/archives/CJFCJHG4Q
+    about: Real-time discussion with the OpenTelemetry community
+  - name: OpenTelemetry Documentation
+    url: https://opentelemetry.io/docs/
+    about: Official OpenTelemetry documentation
